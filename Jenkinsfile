@@ -1,15 +1,14 @@
 pipeline {
 
-	agent slave
+	agent slave //run code with agent slave
 		
 		stages {
 		
-			stage("build") {
+			stage("build") { // stage Build
 			
 				steps {
-					//mkdir spring-petclinic
-					git branch: 'main', url: 'https://github.com/spring-projects/spring-petclinic.git'
-					dir('spring-petclinic') {
+					git branch: 'main', url: 'https://github.com/spring-projects/spring-petclinic.git' //clone repo
+					dir('spring-petclinic') { //do in directory spring-petclinic
 						script{
 							"./mvnw package"
 						}
