@@ -14,7 +14,7 @@ pipeline {
 			stage{
 				dir('spring-petclinic') {
 					stage{
-						./mvnw package
+						"./mvnw package"
 					}
 				}
 			}
