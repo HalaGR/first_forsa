@@ -1,6 +1,6 @@
 pipeline {
 
-	agent slave
+	agent any
 		
 		stages {
 		
@@ -9,12 +9,10 @@ pipeline {
 				steps {
 					mkdir spring-petclinic
 					git branch: 'main', url: 'https://github.com/spring-projects/spring-petclinic.git'
-				}
-			}
-			stage{
-				dir('spring-petclinic') {
-					stage{
-						"./mvnw package"
+					dir('spring-petclinic') {
+						script{
+							"./mvnw package"
+						}
 					}
 				}
 			}
