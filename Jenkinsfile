@@ -8,7 +8,7 @@ pipeline {
 			
 				steps {
 					mkdir spring-petclinic
-					git clone https\://github.com/spring-projects/spring-petclinic.git
+					git branch: 'main', url: 'https://github.com/spring-projects/spring-petclinic.git'
 					cd spring-petclinic
 					./mvnw package
 				}
