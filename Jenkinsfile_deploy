@@ -16,7 +16,9 @@ pipeline {
 			}
       			stage("Archive artifact"){ 
 				steps{
-        				sh "scp -o workspace/Build_job/webapp/target/webapp.war ubuntu@172.31.36.145:/var/lib/tomcat9/webapps"
+					sshagent(['1744f08d-a732-4a13-bc66-1aaf90f35842']) {
+        					sh "scp -o workspace/Build_job/webapp/target/webapp.war ubuntu@172.31.36.145:/var/lib/tomcat9/webapps"
+					}
 				}
       			}
 		}
