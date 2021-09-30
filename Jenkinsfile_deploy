@@ -16,7 +16,7 @@ pipeline {
 			}
       			stage("Archive artifact"){ 
 				steps{
-        				sh "scp -o workspace/Build_job/webapp/target/webapp.war ubuntu@ip:/var/lib/tomcat9/webapps"
+        				sh "scp -o workspace/Build_job/webapp/target/webapp.war ubuntu@172.31.36.145:/var/lib/tomcat9/webapps"
 				}
       			}
 		}
