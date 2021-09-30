@@ -1,6 +1,6 @@
 pipeline {
 
-	agent slave //run code with agent slave
+	agent any //run code with agent slave
 		
 		stages {
 		
