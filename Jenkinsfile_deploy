@@ -4,23 +4,29 @@ pipeline {
 		
 		stages {
 		
-			stage("build") { // stage Build
+			stage("clone") { // stage Build
 			
 				steps {
-					git branch: 'main', url: 'https://github.com/spring-projects/spring-petclinic.git' //clone repo
-          				script{
-						"./mvnw package"
-					}
+					git branch: 'master', url: 'https://github.com/jleetutorial/maven-project.git' //clone repo
+          			
 				}
-				
 			}
-      			stage("Archive artifact"){ 
-				steps{
-					sshagent(['1744f08d-a732-4a13-bc66-1aaf90f35842']) {
-        					sh "scp -o workspace/Build_job/webapp/target/webapp.war ubuntu@172.31.36.145:/var/lib/tomcat9/webapps"
-					}
-				}
-      			}
-		}
+			stage("Build"){
+			    steps{
+				    sh "mvn package"
+			    }
+			}
+			stage('Archive Artifacts'){
+                 steps{
+                    archiveArtifacts artifacts: '**/*.war', followSymlinks: false
+                }
+            }
+            stage('Deploy'){
+                 steps{
+                   deploy adapters: [tomcat9(credentialsId: '87f1aee1-df97-4002-b50a-2a1e850714f3', path: '', url: 'http://172.31.29.243:8888')], contextPath: null, onFailure: false, war: '**/*.war'
+                 }
+            }
+        }
+
 			
-}
+    }
